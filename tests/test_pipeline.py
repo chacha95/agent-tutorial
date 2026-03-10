@@ -50,13 +50,13 @@ def sample_package(sample_script):
 def make_mocked_agents(trend_data, script, package):
     """Return three patched agent mocks with pre-set return values."""
     mock_trend_result = MagicMock()
-    mock_trend_result.data = trend_data
+    mock_trend_result.output = trend_data
 
     mock_script_result = MagicMock()
-    mock_script_result.data = script
+    mock_script_result.output = script
 
     mock_package_result = MagicMock()
-    mock_package_result.data = package
+    mock_package_result.output = package
 
     return mock_trend_result, mock_script_result, mock_package_result
 

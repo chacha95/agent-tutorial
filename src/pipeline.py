@@ -37,7 +37,7 @@ async def run_pipeline(keyword: str, deps: AppDeps) -> ContentPackage:
     # ── Step 1: Research Agent ──────────────────────────────────────
     print(f"🔍 '{keyword}' 트렌드 분석 중...")
     trend_result = await research_agent.run(keyword, deps=deps)
-    trend_data = trend_result.data  # TrendData 인스턴스
+    trend_data = trend_result.output  # TrendData 인스턴스
 
     # ── Step 2: Writer Agent ────────────────────────────────────────
     # ⚠️ trend_data.model_dump_json()으로 직렬화 필수
@@ -47,7 +47,7 @@ async def run_pipeline(keyword: str, deps: AppDeps) -> ContentPackage:
         trend_data.model_dump_json(),
         deps=deps,
     )
-    shorts_script = script_result.data  # ShortsScript 인스턴스
+    shorts_script = script_result.output  # ShortsScript 인스턴스
 
     # ── Step 3: Editor Agent ────────────────────────────────────────
     # 두 모델 모두 JSON으로 직렬화하여 하나의 메시지에 포함
@@ -59,4 +59,4 @@ async def run_pipeline(keyword: str, deps: AppDeps) -> ContentPackage:
     package_result = await editor_agent.run(editor_message, deps=deps)
 
     print("✅ 콘텐츠 패키지 생성 완료!")
-    return package_result.data  # ContentPackage 인스턴스
+    return package_result.output  # ContentPackage 인스턴스
