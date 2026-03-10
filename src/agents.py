@@ -16,7 +16,7 @@ from src.models import ContentPackage, ShortsScript, TrendData
 # 역할: 키워드를 검색하고 TrendData를 반환
 # tools.py에서 @research_agent.tool로 Tavily 검색 도구가 등록됩니다
 research_agent: Agent[AppDeps, TrendData] = Agent(
-    model="gpt-5-nano-2025-08-07",
+    model="openai:gpt-5-nano-2025-08-07",
     deps_type=AppDeps,
     output_type=TrendData,
     system_prompt=(
@@ -31,7 +31,7 @@ research_agent: Agent[AppDeps, TrendData] = Agent(
 # 역할: TrendData를 받아 60초 Shorts 스크립트를 작성
 # 도구 없음 — 순수 LLM 창작
 writer_agent: Agent[AppDeps, ShortsScript] = Agent(
-    model="gpt-5-nano-2025-08-07",
+    model="openai:gpt-5-nano-2025-08-07",
     deps_type=AppDeps,
     output_type=ShortsScript,
     system_prompt=(
@@ -47,7 +47,7 @@ writer_agent: Agent[AppDeps, ShortsScript] = Agent(
 # 역할: 스크립트를 검토하고 최종 ContentPackage를 생성
 # 도구 없음 — 분석과 평가
 editor_agent: Agent[AppDeps, ContentPackage] = Agent(
-    model="gpt-5-nano-2025-08-07",
+    model="openai:gpt-5-nano-2025-08-07",
     deps_type=AppDeps,
     output_type=ContentPackage,
     system_prompt=(

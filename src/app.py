@@ -27,19 +27,23 @@ async def generate_content(keyword: str) -> tuple[str, str, str, str, str, str, 
         empty = "키워드를 입력해주세요."
         return (empty,) * 8
 
-    package = await run_pipeline(keyword.strip(), deps)
-    hashtags_text = " ".join(package.hashtags)
+    try:
+        package = await run_pipeline(keyword.strip(), deps)
+        hashtags_text = " ".join(package.hashtags)
 
-    return (
-        package.title,
-        package.script.hook,
-        package.script.body,
-        package.script.cta,
-        package.thumbnail_copy,
-        hashtags_text,
-        package.upload_time,
-        f"{package.quality_score}/10",
-    )
+        return (
+            package.title,
+            package.script.hook,
+            package.script.body,
+            package.script.cta,
+            package.thumbnail_copy,
+            hashtags_text,
+            package.upload_time,
+            f"{package.quality_score}/10",
+        )
+    except Exception as e:
+        error_msg = f"오류가 발생했습니다: {str(e)}"
+        return (error_msg,) * 8
 
 
 # ── Gradio UI 레이아웃 ──────────────────────────────────────────────

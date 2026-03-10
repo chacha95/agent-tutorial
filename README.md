@@ -32,11 +32,12 @@ Gradio UI 출력 (한국어)
 
 ### 1. 환경 설정
 
-`.env.local` 파일을 생성하고 API 키를 추가하세요:
+`.env.local` 파일 (또는 `.env` 파일)에 API 키를 추가하세요:
 ```
 OPENAI_API_KEY=sk-your-openai-key
 TAVILY_API_KEY=tvly-your-tavily-key
 ```
+> `.env.local`이 `.env`보다 우선 적용됩니다. 두 파일 모두 git에서 제외됩니다.
 
 ### 2. 의존성 설치
 
